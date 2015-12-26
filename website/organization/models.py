@@ -7,7 +7,7 @@ class Organization(models.Model):
     A generic organization. From here we can inherit school, bank etc.
     """
     name = models.CharField("Name", max_length=100)
-    reseller = models.ForeignKey(Reseller)
+    reseller = models.ForeignKey(Reseller, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Organization"
