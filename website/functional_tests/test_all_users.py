@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from selenium import webdriver
 from django.core.urlresolvers import reverse
 from django.contrib.staticfiles.testing import LiveServerTestCase
