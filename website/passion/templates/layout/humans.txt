@@ -3,13 +3,15 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Ashish Acharya -- Developer -- ashishacharya.com
 
 # THANKS
 
-    <name>
+    Contact us for building web applications.
 
 # TECHNOLOGY COLOPHON
 
     HTML5, CSS3
     jQuery, Modernizr
+    Django
+    Twitter Bootstrap

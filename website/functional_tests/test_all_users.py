@@ -18,3 +18,9 @@ class HomeNewVisitorTest(StaticLiveServerTestCase):
     def test_home_title(self):
         self.browser.get(self.get_full_url("home"))
         self.assertIn("Passion", self.browser.title)
+
+    def test_home_files(self):
+        self.browser.get(self.live_server_url + "/robots.txt")
+        self.assertNotIn("Not Found", self.browser.title)
+        self.browser.get(self.live_server_url + "/humans.txt")
+        self.assertNotIn("Not Found", self.browser.title)
