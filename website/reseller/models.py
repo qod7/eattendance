@@ -3,8 +3,6 @@ import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
-from organization.models import Organization
-
 
 def get_default_expiry_date():
     return datetime.datetime.now() + datetime.timedelta(days=365)
@@ -16,9 +14,9 @@ class Reseller(models.Model):
     """
     user = models.OneToOneField(User)
     expiry_date = models.DateField(default=get_default_expiry_date)
-    organization_creation_limit = models.IntegerField(default=1)
     contact = models.CharField("Contact Info", max_length=50, blank=True, default="")
     remarks = models.TextField(blank=True, default="")
+    organization_creation_limit = models.IntegerField(default=1)
 
     class Meta:
         verbose_name = "Reseller"
@@ -31,7 +29,7 @@ class Reseller(models.Model):
         """
         Returns the number of organizations created by the reseller
         """
-        return Organization.objects.filter(reseller=self.user).count()
+        return self.organization_set.count()
 
     def can_create_organization(self):
         """
