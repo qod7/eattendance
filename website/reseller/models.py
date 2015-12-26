@@ -27,7 +27,7 @@ class Reseller(models.Model):
     def __str__(self):
         return self.user.get_full_name()
 
-    def school_count(self):
+    def organization_count(self):
         """
         Returns the number of organizations created by the reseller
         """
@@ -37,7 +37,7 @@ class Reseller(models.Model):
         """
         Can the reseller create an organization?
         """
-        if self.school_count() >= self.organization_creation_limit:
+        if self.organization_count() >= self.organization_creation_limit:
             return False
         return True
 
