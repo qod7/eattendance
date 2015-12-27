@@ -1,3 +1,5 @@
+import datetime
+
 from django.test import TestCase
 from django.contrib.auth.models import User
 
@@ -23,6 +25,7 @@ class ResellerTestCase(TestCase):
         rslr = Reseller.objects.first()
         self.assertEqual(rslr.contact, "")
         self.assertEqual(rslr.remarks, "")
+        self.assertEqual(rslr.expiry_date.year, (datetime.datetime.now() + datetime.timedelta(weeks=52)).year)
 
     def test_reseller_disable(self):
         rslr = Reseller.objects.first()
