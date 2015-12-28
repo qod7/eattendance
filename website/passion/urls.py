@@ -14,7 +14,7 @@ urlpatterns = [
     url(r'^organization/', include(organization_urls, namespace='organization')),
     url(r'^api/', include(api_urls, namespace='api')),
 
-    url(r'^$', views.HomeView.as_view(), name='home'),
+    url(r'^$', views.LoginView.as_view(), name='home'),
     url(r'^(?P<filename>(robots.txt)|(humans.txt))$',
         views.home_files, name='home-files'),
 ]
