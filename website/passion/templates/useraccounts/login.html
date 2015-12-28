@@ -41,12 +41,17 @@
     <div class="content">
         <!-- BEGIN LOGIN FORM -->
         <form class="login-form" action="" method="post">
+            {% csrf_token %}
             <h3 class="form-title">Sign In</h3>
 
-            <div class="alert alert-danger display-hide">
-                <button class="close" data-close="alert"></button>
-                <span>Enter any username and password. </span>
-            </div>
+            {% if messages %}
+                <div id="errorbox" class="alert alert-danger text-center" role="alert">
+                {% for message in messages %}
+                    <button class="close" data-close="alert"></button>
+                    <span>{{ message }}</span>
+                {% endfor %}
+                </div>
+            {% endif %}
 
 			{# username #}
             <div class="form-group">
@@ -72,6 +77,7 @@
 
         <!-- BEGIN FORGOT PASSWORD FORM -->
         <form class="forget-form" action="" method="post">
+            {% csrf_token %}
             <h3>Forget Password ?</h3>
             <p>
                 Enter your e-mail address below to reset your password.
