@@ -8,7 +8,7 @@
 
 {% block user_settings %}
 <li>
-    <a href="extra_profile.html">
+    <a href="{% url 'superadmin:settings' %}">
         <i class="icon-wrench"></i> Settings
      </a>
 </li>
@@ -18,8 +18,38 @@
 {% endblock user_settings %}
 
 {% block sidebar %}
+
+<li id="dashboard">
+    <a href="{% url 'superadmin:home' %}">
+        <i class="icon-home"></i>
+        <span class="title">
+            Dashboard
+        </span>
+    </a>
+</li>
+
+<li id="list_resellers">
+    <a href="{% url 'superadmin:list_resellers' %}">
+        <i class="icon-list"></i>
+        <span class="title">
+            List Resellers
+        </span>
+    </a>
+</li>
+
+<li id="create_reseller">
+    <a href="{% url 'superadmin:create_reseller' %}">
+        <i class="icon-user"></i>
+        <span class="title">
+            Create Reseller
+        </span>
+    </a>
+</li>
+
 {% endblock sidebar %}
 
 {% block content %}
 {% endblock content %}
+
+
 

@@ -1,0 +1,18 @@
+{% extends "superadmin/base.html" %}
+
+
+{% block page_title %}
+    Current Resellers
+{% endblock page_title %}
+
+
+
+{% block extrajs %}
+<script>
+    $( document ).ready(function() {
+        $( "#dashboard" ).removeClass( "active" );
+        $( "#create_reseller" ).removeClass( "active" );
+        $( "#list_resellers" ).addClass( "active" );
+    });
+</script>
+{% endblock extrajs %}

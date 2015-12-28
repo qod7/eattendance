@@ -301,7 +301,11 @@
             <div class="page-content">
                 <!-- BEGIN PAGE HEADER-->
                 <h3 class="page-title">
-                    Blank Page <small>blank page</small>
+                    {% block page_title %}
+
+                        Blank Page <small>blank page</small>
+
+                    {% endblock page_title %}
                 </h3>
 
                 <!-- END PAGE HEADER-->

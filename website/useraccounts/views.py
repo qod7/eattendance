@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import View
 
@@ -18,7 +17,6 @@ class LoginView(View):
     def get(self, request):
         if request.user.is_authenticated():
             return self.check_user_type_and_redirect(request)
-            # return HttpResponse("Logged In!")
 
         return render(self.request, 'useraccounts/login.html', {'title': 'Login'})
 
@@ -32,7 +30,6 @@ class LoginView(View):
             if user.is_active:
                 auth.login(self.request, user)
                 return self.check_user_type_and_redirect(self.request)
-                # return HttpResponse("Logged In!")
             else:
                 messages.error(
                     self.request,

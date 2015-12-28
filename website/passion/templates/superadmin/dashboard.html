@@ -1,0 +1,17 @@
+{% extends "superadmin/base.html" %}
+
+
+{% block page_title %}
+    Dashboard
+{% endblock page_title %}
+
+
+{% block extrajs %}
+<script>
+    $( document ).ready(function() {
+        $( "#list_resellers" ).removeClass( "active" );
+        $( "#create_reseller" ).removeClass( "active" );
+        $( "#dashboard" ).addClass( "active" );
+    });
+</script>
+{% endblock extrajs %}
