@@ -1,0 +1,65 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+{% include "layout/dashboard_base/includes/head.html" %}
+
+<!-- END HEAD -->
+
+{% block extrastyle %}
+{% endblock extrastyle %}
+
+<!-- BEGIN BODY -->
+
+<body class="page-header-fixed page-quick-sidebar-over-content">
+
+    <!-- BEGIN HEADER -->
+
+    {% include "layout/dashboard_base/includes/nav.html" %}
+
+    <!-- END HEADER -->
+
+    <div class="clearfix">
+    </div>
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN SIDEBAR -->
+
+        {% include "layout/dashboard_base/includes/sidebar.html" %}
+
+        <!-- END SIDEBAR -->
+
+        <!-- BEGIN CONTENT -->
+
+        {% include "layout/dashboard_base/includes/content.html" %}
+
+        <!-- END CONTENT -->
+
+        <!-- BEGIN QUICK SIDEBAR -->
+
+        {% include "layout/dashboard_base/includes/quicksidebar.html" %}
+
+        <!-- END QUICK SIDEBAR -->
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+
+    {% include "layout/dashboard_base/includes/footer.html" %}
+
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+
+    {% include "layout/dashboard_base/includes/javascripts.html" %}
+
+    <!-- END JAVASCRIPTS -->
+</body>
+
+<!-- END BODY -->
+
+</html>
