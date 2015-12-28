@@ -9,14 +9,21 @@ from organization.models import Organization
 
 class ResellerTestCase(TestCase):
 
+    """Parent class for defining setUp"""
+
     def setUp(self):
         user = User.objects.create_user('john', 'john@john.com', 'ramramtau')
+        org_a = User.objects.create_user('orga', 'john@john.com', 'ramramtau')
+        org_b = User.objects.create_user('orgb', 'john@john.com', 'ramramtau')
         rslr = Reseller.objects.create(user=user)
-        Organization.objects.create(name="Org A", reseller=rslr)
-        Organization.objects.create(name="Org B", reseller=rslr)
+        Organization.objects.create(name="Org A", reseller=rslr, user=org_a)
+        Organization.objects.create(name="Org B", reseller=rslr, user=org_b)
 
-    # def tearDown(self):
-    #     pass
+
+class ResellerModelsTestCase(ResellerTestCase):
+
+    def setUp(self):
+        super(ResellerModelsTestCase, self).setUp()
 
     def test_reseller_default_values(self):
         """
@@ -47,3 +54,17 @@ class ResellerTestCase(TestCase):
         """
         rslr = Reseller.objects.first()
         self.assertEqual(rslr.can_create_organization(), False)
+
+
+class ResellerViewsTestCase(ResellerTestCase):
+
+    """tests for reseller views"""
+
+    def setUp(self):
+        super(ResellerViewsTestCase, self).setUp()
+
+    def test_only_reseller_can_access_dashboard(self):
+        # try to login with a superadmin # verify rejected
+        # try to login with an organization # verify rejected
+        # try to login with a reseller # verify accepted
+        pass

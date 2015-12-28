@@ -16,3 +16,9 @@ class OrganizationTestCase(TestCase):
         rslr = Reseller.objects.create(user=user)
         Organization.objects.create(name="Org A", reseller=rslr)
         Organization.objects.create(name="Org B", reseller=rslr)
+
+    def test_only_org_can_access_dashboard(self):
+        # try to login with a reseller # verify rejected
+        # try to login with a superadmin # verify rejected
+        # try to login with an organization # verify accepted
+        pass
