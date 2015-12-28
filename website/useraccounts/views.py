@@ -17,8 +17,8 @@ class LoginView(View):
 
     def get(self, request):
         if request.user.is_authenticated():
-            # return self.check_user_type_and_redirect(request)
-            return HttpResponse("Logged In!")
+            return self.check_user_type_and_redirect(request)
+            # return HttpResponse("Logged In!")
 
         return render(self.request, 'useraccounts/login.html', {'title': 'Login'})
 
@@ -31,17 +31,17 @@ class LoginView(View):
         if user is not None:
             if user.is_active:
                 auth.login(self.request, user)
-                # return self.check_user_type_and_redirect(self.request)
-                return HttpResponse("Logged In!")
+                return self.check_user_type_and_redirect(self.request)
+                # return HttpResponse("Logged In!")
             else:
                 messages.error(
                     self.request,
                     "Sorry, your account has been deactivated.\
                      Please contact the administrator.")
-                return redirect('accounts:login')
+                return redirect('account:login')
         else:
             messages.error(self.request, "Invalid username or password.")
-            return redirect('accounts:login')
+            return redirect('account:login')
 
     def check_user_type_and_redirect(self, request):
         '''
@@ -59,10 +59,10 @@ class LoginView(View):
             messages.error(self.request,
                            "Your account has been deleted.\
                             Please contact the administrator.")
-            return redirect('accounts:login')
+            return redirect('account:login')
 
 
-@login_required(login_url='accounts:login')
+@login_required(login_url='account:login')
 def logout(request):
     auth.logout(request)
-    return redirect('accounts:login')
+    return redirect('account:login')
