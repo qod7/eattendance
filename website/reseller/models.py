@@ -12,7 +12,7 @@ class Reseller(models.Model):
     """
     All info and methods pertaining to a reseller
     """
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, related_name='reseller')
     expiry_date = models.DateField(default=get_default_expiry_date)
     contact = models.CharField("Contact Info", max_length=50, blank=True, default="")
     remarks = models.TextField(blank=True, default="")
