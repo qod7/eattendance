@@ -1,8 +1,8 @@
 from django.db import models
-from useraccounts.models import Staff
-from reseller.models import Reseller
-
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import JSONField
+
+from reseller.models import Reseller
 
 
 METHOD_CHOICES = (
@@ -40,7 +40,7 @@ class Notice(models.Model):
     # Organisation
     message = models.CharField("Message", max_length=400)
     organization = models.ForeignKey(Organization, related_name='notices')
-    sentOn = models.DateTimeField(auto_now=True, auto_now_add=True)
+    sentOn = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = "Notice"
@@ -62,9 +62,36 @@ class Shift(models.Model):
         pass
 
 
+class Staff(models.Model):
+    # some sort of ID (15 digit, 5 digit for organization, 5 for user, and 5 random padding for security?)
+    # first name
+    # last name
+    # dob (fo birthday and shit)
+    # TODO shift
+    # TODO user group
+    # password hash
+    # Extra Fields (Json string)
+    # photo (user id. jpg) (simple af)
+    # preferences (for app?)  (should also be a Json String)
+    # Organization
+    user = models.OneToOneField(User, related_name='staff')
+    organization = models.ForeignKey(Organization, related_name='staffs')
+    # some sort of ID
+    # 15 digit, 5 digit for organization,
+    # 5 for user, and 5 random padding for security
+    uniqueId = models.CharField("Unique Id", max_length=15)
+    dob = models.DateField()
+    extras = JSONField()
+    preferences = JSONField()
+    photo = models.ImageField()
+
+    def __str__(self):
+        return self.user.username
+
+
 class Attendance(models.Model):
     staff = models.ForeignKey(Staff, related_name='attendances')
-    when = models.DateTimeField(auto_now=True, auto_now_add=True)
+    when = models.DateTimeField(auto_now_add=True)
     method = models.IntegerField(choices=METHOD_CHOICES, default=1)
 
     class Meta:
