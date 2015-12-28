@@ -23,6 +23,7 @@
 
         <!-- BEGIN TOP NAVIGATION MENU -->
         <div class="top-menu">
+            {% block nav %}
             <ul class="nav navbar-nav pull-right">
 
                 <!-- BEGIN NOTIFICATION DROPDOWN -->
@@ -147,6 +148,7 @@
                 <!-- END QUICK SIDEBAR TOGGLER -->
                 {% endcomment %}
             </ul>
+            {% endblock nav %}
         </div>
         <!-- END TOP NAVIGATION MENU -->
     </div>
