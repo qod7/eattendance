@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'api',
     'organization',
     'reseller',
+    'superadmin',
 ]
 
 MIDDLEWARE_CLASSES = [
