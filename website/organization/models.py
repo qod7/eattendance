@@ -18,7 +18,7 @@ class Organization(models.Model):
     """
     A generic organization. From here we can inherit school, bank etc.
     """
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='organization')
     name = models.CharField("Name", max_length=100)
     reseller = models.ForeignKey(Reseller, on_delete=models.CASCADE)
 
