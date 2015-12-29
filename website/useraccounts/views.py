@@ -41,12 +41,16 @@ class LoginView(View):
             return redirect('account:login')
 
     def check_user_type_and_redirect(self, request):
-        '''
-        check whether the user is a superadmin, reseller, or organization
+        """
+        Check whether the user is a superadmin, reseller, or organization
         and redirect them to their respective dashboard
-        '''
+        """
         if request.user.is_staff:
             return redirect('superadmin:home')
+
+        # todo: find a way to do the following using groups
+        # request.user.is_reseller and request.user.is_organization?
+        # request.user.groups.filter(name='Reseller').exists()
         elif Reseller.objects.filter(user=request.user).exists():
             return redirect('reseller:home')
         elif Organization.objects.filter(user=request.user).exists():
