@@ -39,7 +39,7 @@ class Notice(models.Model):
     # replied to (is the id of some other notice or null)
     # Organisation
     message = models.CharField("Message", max_length=400)
-    organization = models.ForeignKey(Organization, related_name='notices')
+    organization = models.ForeignKey(Organization, related_name='notices', on_delete=models.CASCADE)
     sentOn = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -74,8 +74,8 @@ class Staff(models.Model):
     # photo (user id. jpg) (simple af)
     # preferences (for app?)  (should also be a Json String)
     # Organization
-    user = models.OneToOneField(User, related_name='staff')
-    organization = models.ForeignKey(Organization, related_name='staffs')
+    user = models.OneToOneField(User, related_name='staff', on_delete=models.CASCADE)
+    organization = models.ForeignKey(Organization, related_name='staffs', on_delete=models.CASCADE)
     # some sort of ID
     # 15 digit, 5 digit for organization,
     # 5 for user, and 5 random padding for security
@@ -90,7 +90,7 @@ class Staff(models.Model):
 
 
 class Attendance(models.Model):
-    staff = models.ForeignKey(Staff, related_name='attendances')
+    staff = models.ForeignKey(Staff, related_name='attendances', on_delete=models.CASCADE)
     when = models.DateTimeField(auto_now_add=True)
     method = models.IntegerField(choices=METHOD_CHOICES, default=1)
 
