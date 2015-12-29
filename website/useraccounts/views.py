@@ -37,7 +37,8 @@ class LoginView(View):
                      Please contact the administrator.")
                 return redirect('account:login')
         else:
-            messages.error(self.request, "Invalid username or password.")
+            messages.error(self.request, "Invalid username or password."
+                           " Note that both fields may be case-sensitive.")
             return redirect('account:login')
 
     def check_user_type_and_redirect(self, request):
@@ -47,10 +48,6 @@ class LoginView(View):
         """
         if request.user.is_staff:
             return redirect('superadmin:home')
-
-        # todo: find a way to do the following using groups
-        # request.user.is_reseller and request.user.is_organization?
-        # request.user.groups.filter(name='Reseller').exists()
         elif Reseller.objects.filter(user=request.user).exists():
             return redirect('reseller:home')
         elif Organization.objects.filter(user=request.user).exists():
