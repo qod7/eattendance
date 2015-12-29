@@ -91,6 +91,9 @@ DATABASES = {
         'PASSWORD': 'attendance@passion',
         'HOST': 'localhost',
         'PORT': '',
+        'TEST': {
+            'NAME': 'passion_test',
+        },
     }
 }
 
