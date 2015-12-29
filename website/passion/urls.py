@@ -12,7 +12,7 @@ from useraccounts import urls as account_urls
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
-    url(r'^account/', include(account_urls, namespace='account')),
+    url(r'^accounts/', include(account_urls, namespace='account')),
     url(r'^reseller/', include(reseller_urls, namespace='reseller')),
     url(r'^organization/', include(organization_urls, namespace='organization')),
     url(r'^superadmin/', include(superadmin_urls, namespace='superadmin')),
