@@ -4,6 +4,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 class SuperAdminTestMixin(LoginRequiredMixin, UserPassesTestMixin):
 
+    """
+    Checks if user is logged in and if user is a superadmin
+    """
+
     def test_func(self):
         return self.request.user.is_staff
 
