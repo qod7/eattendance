@@ -2,7 +2,7 @@ import datetime
 from django.utils import timezone
 
 from django.test import TestCase
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User  # , Group
 
 from .models import Reseller
 from organization.models import Organization
@@ -57,3 +57,10 @@ class ResellerModelsTestCase(TestCase):
         """
         rslr = Reseller.objects.first()
         self.assertEqual(rslr.can_create_organization(), False)
+
+    # def test_group_reseller_exists(self):
+    #     """
+    #     Group Reseller needs to exists for the checks on the
+    #     reseller.views.ResellerTestMixin level to work.
+    #     """
+    #     self.assertEqual(Group.objects.filter(name__icontains='Reseller').exists(), True)
