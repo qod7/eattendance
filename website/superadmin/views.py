@@ -2,23 +2,23 @@ from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
-class SuperAdminTestMixin(UserPassesTestMixin):
+class SuperAdminTestMixin(LoginRequiredMixin, UserPassesTestMixin):
 
     def test_func(self):
         return self.request.user.is_staff
 
 
-class HomeView(LoginRequiredMixin, SuperAdminTestMixin, TemplateView):
+class HomeView(SuperAdminTestMixin, TemplateView):
     template_name = "superadmin/dashboard.html"
 
 
-class ListResellersView(LoginRequiredMixin, SuperAdminTestMixin, TemplateView):
+class ListResellersView(SuperAdminTestMixin, TemplateView):
     template_name = "superadmin/list_resellers.html"
 
 
-class CreateResellerView(LoginRequiredMixin, SuperAdminTestMixin, TemplateView):
+class CreateResellerView(SuperAdminTestMixin, TemplateView):
     template_name = "superadmin/create_reseller.html"
 
 
-class SettingsView(LoginRequiredMixin, SuperAdminTestMixin, TemplateView):
+class SettingsView(SuperAdminTestMixin, TemplateView):
     template_name = "superadmin/settings.html"
