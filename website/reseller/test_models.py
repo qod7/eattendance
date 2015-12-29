@@ -28,16 +28,26 @@ class ResellerModelsTestCase(TestCase):
         self.assertEqual(rslr.expiry_date.year, (timezone.now() + datetime.timedelta(weeks=52)).year)
 
     def test_reseller_disable(self):
+        """
+        Disable the reseller.
+        """
+        # todo: try to login
         rslr = Reseller.objects.first()
         rslr.deactivate_account()
         self.assertEqual(rslr.user.is_active, False)
 
     def test_reseller_enable(self):
+        """
+        Enable the reseller
+        """
         rslr = Reseller.objects.first()
         rslr.activate_account()
         self.assertEqual(rslr.user.is_active, True)
 
     def test_reseller_org_count(self):
+        """
+        Count the number of organizations created by a reseller
+        """
         rslr = Reseller.objects.first()
         self.assertEqual(rslr.organization_count(), 2)
 
