@@ -14,7 +14,11 @@ class ResellerTestMixin(LoginRequiredMixin, UserPassesTestMixin):
     """
 
     def test_func(self):
-        return self.request.user.reseller
+        try:
+            return self.request.user.reseller
+        # except RelatedObjectDoesNotExist:
+        except:
+            return False
 
 
 class HomeView(ResellerTestMixin, TemplateView):
