@@ -181,6 +181,6 @@ class ForgotPasswordTestCase(TestCase):
 
     def test_reset_confirm_template_used(self):
         response = self.client.get(reverse("account:password_reset_confirm",
-                                           args={'Mg', '484-aece2515580f9d316f41'}))
+                                           kwargs={'uidb64': 'Mg', 'token': '484-aece2515580f9d316f41'}))
         self.assertTemplateUsed(response, "useraccounts/password_reset/password_reset_confirm.html")
         self.assertEqual(response.context['title'], "Password reset unsuccessful")
