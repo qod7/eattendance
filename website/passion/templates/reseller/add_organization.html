@@ -1,0 +1,18 @@
+{% extends "reseller/base.html" %}
+
+
+{% block page_title %}
+    Add an Organization
+{% endblock page_title %}
+
+
+
+{% block extrajs %}
+<script>
+    $( document ).ready(function() {
+        $( "#dashboard" ).removeClass( "active" );
+        $( "#list_organizations" ).removeClass( "active" );
+        $( "#add_organization" ).addClass( "active" );
+    });
+</script>
+{% endblock extrajs %}
