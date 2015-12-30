@@ -10,15 +10,12 @@
 
 <head>
     {% include "layout/dashboard_base/includes/head.html" %}
-</head>
-
-{% block extrahead %}
 
     <!-- BEGIN PAGE LEVEL STYLES -->
     <link href="{% static "assets/admin/pages/css/login.css" %}" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL SCRIPTS -->
 
-{% endblock extrahead %}
+</head>
 
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -32,7 +29,7 @@
     <!-- BEGIN LOGO -->
 
     <div class="logo">
-        <a href="index.html">
+        <a href="{% url 'account:login' %}">
             <img src="{% static "assets/admin/layout/img/logo-big.png" %}" alt="" />
         </a>
     </div>
