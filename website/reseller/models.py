@@ -9,6 +9,7 @@ def get_default_expiry_date():
 
 
 class Reseller(models.Model):
+
     """
     All info and methods pertaining to a reseller
     """
@@ -24,6 +25,9 @@ class Reseller(models.Model):
 
     def __str__(self):
         return self.user.get_full_name()
+
+    def get_full_name(self):
+        return self.__str__()
 
     def organization_count(self):
         """
