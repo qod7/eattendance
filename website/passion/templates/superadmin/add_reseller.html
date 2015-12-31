@@ -6,6 +6,55 @@
 {% endblock page_title %}
 
 
+{% block content %}
+<div class="col-md-6">
+    <div class="portlet light bordered">
+        <div class="portlet-title">
+            <div class="caption font-green">
+                {# <i class="icon-plus font-green"></i> #}
+                <span class="caption-subject bold uppercase"> Fill out the form below</span>
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <form role="form">
+                <div class="form-body">
+                    <div class="form-group form-md-line-input form-md-floating-label">
+                        <input type="text" class="form-control" id="form_control_1">
+                        <label for="form_control_1">First Name</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label">
+                        <input type="text" class="form-control" id="form_control_1">
+                        <label for="form_control_1">Last Name</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label">
+                        <input type="email" class="form-control" id="form_control_1">
+                        <label for="form_control_1">Email Address</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label">
+                        <input type="text" class="form-control" id="form_control_1">
+                        <label for="form_control_1">Contact Number</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label">
+                        <textarea class="form-control" rows="3"></textarea>
+                        <label for="form_control_1">Additional Info</label>
+                        <span class="help-block">Optional</span>
+                    </div>
+                    <div class="form-group form-md-line-input">
+                        <input type="text" class="form-control" id="form_control_1" value="5">
+                        <label for="form_control_1">Organization Limit</label>
+                        <span class="help-block">The maximum number of organizations that can be created</span>
+                    </div>
+                </div>
+                <div class="form-actions noborder">
+                    <button type="button" class="btn blue">Add Reseller</button>
+                    {# <button type="button" class="btn default">Cancel</button> #}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
 
 {% block extrajs %}
 <script>
