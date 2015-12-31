@@ -1,3 +1,29 @@
-{# {% extends "layout/dashboard_base/base.html" %} #}
+{% extends "layout/dashboard_base/base.html" %}
 
-Organization
+{% block notifications %}
+{% endblock notifications %}
+
+{% block messages %}
+{% endblock messages %}
+
+{% block user_settings %}
+<li>
+    <a href="#">
+        <i class="icon-wrench"></i> Settings
+     </a>
+</li>
+
+<li class="divider">
+</li>
+{% endblock user_settings %}
+
+{% block sidebar %}
+{% endblock sidebar %}
+
+{% block content %}
+{% endblock content %}
+
+{% block page_title %}
+    Organization
+{% endblock page_title %}
+
