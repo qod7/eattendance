@@ -6,6 +6,74 @@
 {% endblock page_title %}
 
 
+{% block content %}
+    <!-- BEGIN DASHBOARD STATS -->
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat blue-madison">
+                <div class="visual">
+                    <i class="fa fa-comments"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                         10
+                    </div>
+                    <div class="desc">
+                         Resellers
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat red-intense">
+                <div class="visual">
+                    <i class="fa fa-bar-chart-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                         100
+                    </div>
+                    <div class="desc">
+                         Organizations
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat green-haze">
+                <div class="visual">
+                    <i class="fa fa-shopping-cart"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                         1000
+                    </div>
+                    <div class="desc">
+                         Staff
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat purple-plum">
+                <div class="visual">
+                    <i class="fa fa-globe"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                         50000
+                    </div>
+                    <div class="desc">
+                         Attendance Records
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END DASHBOARD STATS -->
+{% endblock content %}
+
+
 {% block extrajs %}
 <script>
     $( document ).ready(function() {
