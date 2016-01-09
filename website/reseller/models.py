@@ -17,7 +17,9 @@ class Reseller(models.Model):
     # expiry_date = models.DateField(default=get_default_expiry_date)
     contact = models.CharField("Contact Info", max_length=50, blank=True, default="")
     remarks = models.TextField(blank=True, default="")
-    organization_creation_limit = models.IntegerField(default=1)
+    organization_creation_limit = models.IntegerField(default=1,
+                                                      help_text="The maximum number of organizations\
+                                                       that can be created.")
 
     class Meta:
         verbose_name = "Reseller"
