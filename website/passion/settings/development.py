@@ -7,3 +7,7 @@ DEBUG = True
 # Email
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'emailcopies')
+
+INSTALLED_APPS += (
+    'debug_toolbar',
+)
