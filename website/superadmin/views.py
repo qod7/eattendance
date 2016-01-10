@@ -1,9 +1,12 @@
 from django.views.generic import TemplateView
+from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic.edit import FormView
 from django.core.urlresolvers import reverse
 
 from .forms import AddResellerForm
+
+from reseller.models import Reseller
 
 
 class SuperAdminTestMixin(LoginRequiredMixin, UserPassesTestMixin):
@@ -29,17 +32,21 @@ class HomeView(SuperAdminTestMixin, TemplateView):
         return context
 
 
-class ListResellersView(SuperAdminTestMixin, TemplateView):
+class ResellerListView(SuperAdminTestMixin, ListView):
 
     """
     Lists the current resellers with various fields.
     """
+    context_object_name = 'reseller_list'
     template_name = "superadmin/list_resellers.html"
 
     def get_context_data(self, **kwargs):
-        context = super(ListResellersView, self).get_context_data(**kwargs)
+        context = super(ResellerListView, self).get_context_data(**kwargs)
         context['title'] = "List Resellers"
         return context
+
+    def get_queryset(self):
+        return Reseller.objects.select_related('user').all()
 
 
 class AddResellerView(SuperAdminTestMixin, FormView):
