@@ -1,6 +1,8 @@
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
+from .models import Reseller
+
 
 class ResellerTestMixin(LoginRequiredMixin, UserPassesTestMixin):
 
@@ -16,8 +18,7 @@ class ResellerTestMixin(LoginRequiredMixin, UserPassesTestMixin):
     def test_func(self):
         try:
             return self.request.user.reseller
-        # except RelatedObjectDoesNotExist:
-        except:
+        except Reseller.DoesNotExist:
             return False
 
 

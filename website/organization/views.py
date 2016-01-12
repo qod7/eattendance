@@ -2,6 +2,8 @@ from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 # from django.db.models.fields.related_descriptors import RelatedObjectDoesNotExist
 
+from .models import Organization
+
 
 class OrganizationTestMixin(LoginRequiredMixin, UserPassesTestMixin):
 
@@ -12,8 +14,7 @@ class OrganizationTestMixin(LoginRequiredMixin, UserPassesTestMixin):
     def test_func(self):
         try:
             return self.request.user.organization
-        # except RelatedObjectDoesNotExist:
-        except:
+        except Organization.DoesNotExist:
             return False
 
 
