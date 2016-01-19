@@ -25,6 +25,7 @@ class Organization(models.Model):
     class Meta:
         verbose_name = "Organization"
         verbose_name_plural = "Organizations"
+        ordering = ('-user__date_joined',)
 
     def __str__(self):
         return self.name
@@ -84,6 +85,10 @@ class Staff(models.Model):
     extras = JSONField()
     preferences = JSONField()
     photo = models.ImageField()
+
+    class Meta:
+        verbose_name = "Staff"
+        verbose_name_plural = "Staff"
 
     def __str__(self):
         return self.user.username
