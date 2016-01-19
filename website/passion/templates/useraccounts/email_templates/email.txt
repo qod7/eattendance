@@ -1,0 +1,16 @@
+Hello {{ name }},
+
+An account has been created for you at Passion E-attendance.
+
+You can log in with the following credentials:
+
+Login URL: http://127.0.0.1:8000{% url 'account:login' %}
+Username: {{ user.username }}
+Password: {{ password }}
+
+Thank you for choosing Passion E-attendance.
+
+Best Regards,
+
+CEO
+Passion E-attendance

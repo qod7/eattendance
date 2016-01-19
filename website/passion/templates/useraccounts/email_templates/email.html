@@ -1,0 +1,15 @@
+<html>
+<body>
+    <table>
+        <tr>Hello {{ name }},<br></tr>
+        <tr><br>An account has been created for you at Passion E-attendance.<br></tr>
+        <tr>You can log in with the following credentials:<br></tr>
+        <tr><br><strong>Login URL:</strong> http://127.0.0.1:8000{% url 'account:login' %}</tr>
+        <tr><strong>Username:</strong> {{ user.username }}</tr>
+        <tr><strong>Password:</strong> {{ password }}<br></tr>
+        <tr><br>Thank you for choosing Passion E-attendance.</tr>
+
+        <tr><br><strong>Best Regards,</strong><br>Director<br>Passion E-attendance<br></tr>
+    </table>
+</body>
+</html>
