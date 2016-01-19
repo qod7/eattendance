@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from .forms import AddResellerForm
 
 from reseller.models import Reseller
+from organization.models import Organization, Staff, Attendance
 
 
 class SuperAdminTestMixin(LoginRequiredMixin, UserPassesTestMixin):
@@ -30,6 +31,10 @@ class HomeView(SuperAdminTestMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         context['title'] = "Dashboard"
+        context['reseller_count'] = Reseller.objects.count()
+        context['organization_count'] = Organization.objects.count()
+        context['staff_count'] = Staff.objects.count()
+        context['attendance_count'] = Attendance.objects.count()
         return context
 
 
