@@ -31,8 +31,8 @@ class AddOrganizationForm(GenericUserCreationForm):
         Sends login credentials in email.
         """
         # create user/send login credentials via email.
-        # todo: add some sort of assertion mechanism. some try/catch block
         user = super(AddOrganizationForm, self).save()
+        assert user is not None
 
         # create an organization
         Organization.objects.create(
