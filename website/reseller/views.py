@@ -1,7 +1,11 @@
 from django.views.generic import TemplateView
+from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib import messages
+from django.core.urlresolvers import reverse
 
 from .models import Reseller
+from .forms import AddOrganizationForm
 
 
 class ResellerTestMixin(LoginRequiredMixin, UserPassesTestMixin):
@@ -48,15 +52,26 @@ class ListOrganizationsView(ResellerTestMixin, TemplateView):
         return context
 
 
-class AddOrganizationsView(ResellerTestMixin, TemplateView):
+class AddOrganizationView(ResellerTestMixin, FormView):
 
     """
-    Shows a form to add a organization.
+    Shows and processes form to add an organization.
     """
-    template_name = "reseller/add_organization.html"
+    template_name = 'reseller/add_organization.html'
+    form_class = AddOrganizationForm
+
+    def get_success_url(self):
+        messages.success(self.request, 'New organization has been added successfully!')
+        messages.success(self.request, 'Login credentials have been emailed.')
+        return reverse('reseller:list_organizations')
+
+    def form_valid(self, form):
+        form.save(commit=False)
+        # form.send_email()
+        return super(AddOrganizationView, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
-        context = super(AddOrganizationsView, self).get_context_data(**kwargs)
+        context = super(AddOrganizationView, self).get_context_data(**kwargs)
         context['title'] = "Add an Organization"
         return context
 
