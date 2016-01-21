@@ -12,8 +12,8 @@ class GenericUserCreationForm(forms.Form):
 
     """
     - Takes first name, last name, email
-    - Creates a username with firstname_lastname if it doesn't exist
-    - Otherwise adds '1' to the end of the username
+    - Creates a username with firstname_lastname
+    - If username exists, adds '1' to the end of the username
     - Generates a random password
     - sends an email to the user with the login credentials
     """
