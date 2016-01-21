@@ -1,6 +1,12 @@
 from django import forms
 from django.contrib.auth.models import User
 
+# for email
+from django.core.mail import EmailMultiAlternatives  # , get_connection
+from django.template.loader import get_template
+from django.template import Context
+# end
+
 from reseller.models import Reseller
 
 
@@ -63,59 +69,74 @@ class AddResellerForm(forms.ModelForm):
         return username
 
     def save(self, commit=False):
+        """
+        Creates the user and saves the reseller from form parameters.
+        Sends login credentials in email.
+        """
         # get the reseller data from the form
         reseller = super(AddResellerForm, self).save(commit=False)
+
         # get form parameters
         first_name = self.cleaned_data.get('first_name').lower()
         last_name = self.cleaned_data.get('last_name').lower()
         email = self.cleaned_data.get('email').lower()
+
         # generate a password
         password = User.objects.make_random_password()
+
         # create a user with username = fname_lname
         username = self.clean_username(first_name + '_' + last_name)
+
         # save first name, last name, email to the user
         user = User.objects.create_user(username, email, password)
         user.first_name = first_name.title()
         user.last_name = last_name.title()
         user.save()
+
         # send an email to the user with his credentials
+        self.send_email(user, password)
+
         # set this user to the model instance's user object
         reseller.user = user
         reseller.save()
+
         super(AddResellerForm, self).save(commit=True)
 
-    # def send_email(self, user, password):
-    #     """
-    #     Sends an email to the school admin with login credentials
-    #     """
-    #     from_email = 'Max Connect<maxconnectnepal@gmail.com>'
-    #     template_subject = 'reseller/email_templates/subject.txt'
-    #     template_html = 'reseller/email_templates/email.html'
-    #     template_text = 'reseller/email_templates/email.txt'
-    #     subject = get_template(template_subject)
-    #     html = get_template(template_html)
-    #     text = get_template(template_text)
+    def send_email(self, user, password):
+        """
+        Sends an email to the reseller with their login credentials
+        """
+        from_email = 'Passion Technologies<passion@gmail.com>'
+        template_subject = 'useraccounts/email_templates/subject.txt'
+        template_html = 'useraccounts/email_templates/email.html'
+        template_text = 'useraccounts/email_templates/email.txt'
+        subject = get_template(template_subject)
+        html = get_template(template_html)
+        text = get_template(template_text)
 
-    #     c = Context({
-    #         'user': user,
-    #         'password': password,
-    #         'name': self.cleaned_data['admin_first_name'] + ' ' + self.cleaned_data['admin_last_name'],
-    #     })
+        c = Context({
+            'user': user,
+            'password': password,
+            'name': self.cleaned_data['first_name'] + ' ' + self.cleaned_data['last_name'],
+        })
 
-    #     subject_content = subject.render(c)
-    #     text_content = text.render(c)
-    #     html_content = html.render(c)
+        subject_content = subject.render(c)
+        text_content = text.render(c)
+        html_content = html.render(c)
 
-    #     msg = EmailMultiAlternatives(
-    #         subject=subject_content, body=text_content, from_email=from_email, to=[self.cleaned_data['admin_email']])
+        msg = EmailMultiAlternatives(
+            subject=subject_content, body=text_content, from_email=from_email, to=[self.cleaned_data['email']])
 
-    #     msg.attach_alternative(html_content, "text/html")
-    #     msg.send(fail_silently=True)
+        msg.attach_alternative(html_content, "text/html")
+        msg.send(fail_silently=True)
 
-    # def clean_email(self):
-    #     username = self.cleaned_data.get('username')
-    #     if User.objects.filter(username=username).exists():
-    #         raise forms.ValidationError('Username "%(value)s" is already in use.',
-    #                                     params={'value': username},
-    #                                     code='already_exists')
-    #     return email
+    def clean_email(self):
+        """
+        Makes sure that user with the same email address does not already exist.
+        """
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError('Email address "%(value)s" is already in use.',
+                                        params={'value': email},
+                                        code='already_exists')
+        return email
