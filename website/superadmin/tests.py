@@ -22,3 +22,36 @@ class OrganizationTestCase(TestCase):
         # try to login with an organization # verify rejected
         # try to login with a superadmin # verify accepted
         pass
+
+
+class AddResellerFormTestCase(object):
+    """Tests for AddResellerForm"""
+
+    def test_template_rendered(self):
+        pass
+
+    def test_submitting_form_with_long_first_name(self):
+        pass
+
+    def test_submitting_form_with_long_last_name(self):
+        pass
+
+    def test_form_with_invalid_email(self):
+        pass
+
+    def test_existing_email_address(self):
+        pass
+
+    def test_select_option_not_in_list(self):
+        pass
+
+    def test_valid_form(self):
+        # redirects correctly
+        # shows message
+        pass
+
+    def test_email_to_reseller(self):
+        # sends email
+        # username in email
+        # password in email
+        pass
