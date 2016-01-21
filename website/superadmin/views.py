@@ -1,8 +1,8 @@
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
+from django.views.generic.edit import FormView
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic.edit import FormView
 from django.core.urlresolvers import reverse
 
 from .forms import AddResellerForm
@@ -64,7 +64,8 @@ class AddResellerView(SuperAdminTestMixin, FormView):
     form_class = AddResellerForm
 
     def get_success_url(self):
-        messages.success(self.request, 'New reseller added successfully!')
+        messages.success(self.request, 'New reseller has been added successfully!')
+        messages.success(self.request, 'Login credentials have been emailed.')
         return reverse('superadmin:list_resellers')
 
     def form_valid(self, form):
