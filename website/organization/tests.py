@@ -5,6 +5,12 @@ from .models import Organization
 from reseller.models import Reseller
 
 
+# to satisfy LoginRequiredMixin
+# self.client.login(username='org', password='ramramtau')  # returns True if successful
+# or
+# self.client.force_login(user=org)  # returns True if successful
+
+
 class OrganizationTestCase(TestCase):
 
     """
@@ -22,6 +28,7 @@ class OrganizationTestCase(TestCase):
 
     def test_only_org_can_access_dashboard(self):
         # try to login with a reseller # verify rejected
+        # self.client.login(request)
         # try to login with a superadmin # verify rejected
         # try to login with an organization # verify accepted
         pass
