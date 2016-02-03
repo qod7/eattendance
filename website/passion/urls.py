@@ -16,6 +16,8 @@ urlpatterns = [
     url(r'^reseller/', include(reseller_urls, namespace='reseller')),
     url(r'^organization/', include(organization_urls, namespace='organization')),
     url(r'^superadmin/', include(superadmin_urls, namespace='superadmin')),
+
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include(api_urls, namespace='api')),
 
     url(r'^$', views.HomeView.as_view(), name='home'),
