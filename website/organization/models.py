@@ -31,13 +31,6 @@ class Message(models.Model):
     A Message is something sent by the organization to a subset of staff
     """
 
-    # id
-    # sender id
-    # receiver id
-    # message
-    # sent on (date/time)
-    # replied to (is the id of some other Message or null)
-    # Organisation
     title = models.CharField("Title", max_length=50)
     message = models.CharField("Message", max_length=400)
     organization = models.ForeignKey(Organization, related_name='messages', on_delete=models.CASCADE)
