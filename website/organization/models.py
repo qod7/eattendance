@@ -18,6 +18,7 @@ class Organization(models.Model):
     """
     A generic organization. From here we can inherit school, bank etc.
     """
+
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='organization')
     name = models.CharField("Name", max_length=100)
     contact = models.CharField("Admin's Contact Number", max_length=50)
@@ -33,6 +34,11 @@ class Organization(models.Model):
 
 
 class Notice(models.Model):
+
+    """
+    A notice is something sent by the organization to a subset of staff
+    """
+
     # id
     # sender id
     # receiver id
@@ -49,10 +55,16 @@ class Notice(models.Model):
         verbose_name_plural = "Notices"
 
     def __str__(self):
-        return self.message
+        return self.title
 
 
 class Shift(models.Model):
+
+    """
+    Defines a Shift for a staff
+    """
+
+    name = models.CharField("Name of the Shift", max_length=50)
     checkIn = models.TimeField()
     checkOut = models.TimeField()
 
@@ -61,7 +73,7 @@ class Shift(models.Model):
         verbose_name_plural = "Shifts"
 
     def __str__(self):
-        pass
+        return self.name
 
 
 class Staff(models.Model):
@@ -96,6 +108,11 @@ class Staff(models.Model):
 
 
 class Attendance(models.Model):
+
+    """
+    Records a single attendance
+    """
+
     staff = models.ForeignKey(Staff, related_name='attendances', on_delete=models.CASCADE)
     when = models.DateTimeField(auto_now_add=True)
     method = models.IntegerField(choices=METHOD_CHOICES, default=1)
