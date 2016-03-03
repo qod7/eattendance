@@ -5,14 +5,6 @@ from django.contrib.postgres.fields import JSONField
 from reseller.models import Reseller
 
 
-METHOD_CHOICES = (
-    (1, 'fingerprint'),
-    (2, 'rfid'),
-    (3, 'password'),
-    (4, 'manual'),
-)
-
-
 class Organization(models.Model):
 
     """
@@ -115,6 +107,13 @@ class Attendance(models.Model):
     """
     Records a single attendance
     """
+
+    METHOD_CHOICES = (
+        (1, 'fingerprint'),
+        (2, 'rfid'),
+        (3, 'password'),
+        (4, 'manual'),
+    )
 
     staff = models.ForeignKey(Staff, related_name='attendances', on_delete=models.CASCADE)
     when = models.DateTimeField(auto_now_add=True)
