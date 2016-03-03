@@ -80,23 +80,23 @@ class Shift(models.Model):
 
 
 class Staff(models.Model):
+
+    """
+    A staff can log in to the android app.
+    - is associated with an organization
+    - has an ID that can identify org
+    - has a date of birth for birthday
+    - has a particular shift
+    """
+
     # some sort of ID (15 digit, 5 digit for organization, 5 for user, and 5 random padding for security?)
-    # first name
-    # last name
-    # dob (fo birthday and shit)
-    # TODO shift
     # TODO user group
-    # password hash
-    # Extra Fields (Json string)
-    # photo (user id. jpg) (simple af)
-    # preferences (for app?)  (should also be a Json String)
-    # Organization
     user = models.OneToOneField(User, related_name='staff', on_delete=models.CASCADE)
     organization = models.ForeignKey(Organization, related_name='staffs', on_delete=models.CASCADE)
-    # some sort of ID
+    shift = models.ForeignKey(Shift, related_name="staff", on_delete=models.CASCADE)
     # 15 digit, 5 digit for organization,
     # 5 for user, and 5 random padding for security
-    uniqueId = models.CharField("Unique Id", max_length=15)
+    unique_id = models.CharField("Unique Id", primary_key=True, max_length=15)
     dob = models.DateField()
     extras = JSONField()
     preferences = JSONField()
