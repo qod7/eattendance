@@ -33,10 +33,10 @@ class Organization(models.Model):
         return self.name
 
 
-class Notice(models.Model):
+class Message(models.Model):
 
     """
-    A notice is something sent by the organization to a subset of staff
+    A Message is something sent by the organization to a subset of staff
     """
 
     # id
@@ -44,15 +44,18 @@ class Notice(models.Model):
     # receiver id
     # message
     # sent on (date/time)
-    # replied to (is the id of some other notice or null)
+    # replied to (is the id of some other Message or null)
     # Organisation
+    title = models.CharField("Title", max_length=50)
     message = models.CharField("Message", max_length=400)
-    organization = models.ForeignKey(Organization, related_name='notices', on_delete=models.CASCADE)
-    sentOn = models.DateTimeField(auto_now_add=True)
+    organization = models.ForeignKey(Organization, related_name='messages', on_delete=models.CASCADE)
+    sender = models.ForeignKey(User, related_name='sent_messages', on_delete=models.CASCADE)
+    receiver = models.ForeignKey(User, related_name='received_messages', on_delete=models.CASCADE)
+    sent_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        verbose_name = "Notice"
-        verbose_name_plural = "Notices"
+        verbose_name = "Message"
+        verbose_name_plural = "Messages"
 
     def __str__(self):
         return self.title
