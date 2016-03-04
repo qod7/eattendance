@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 # for email
 from django.core.mail import EmailMultiAlternatives  # , get_connection
 from django.template.loader import get_template
-from django.template import Context
 # end
 
 
@@ -72,11 +71,11 @@ class GenericUserCreationForm(forms.Form):
         html = get_template(template_html)
         text = get_template(template_text)
 
-        c = Context({
+        c = {
             'user': user,
             'password': password,
             'name': self.cleaned_data['first_name'] + ' ' + self.cleaned_data['last_name'],
-        })
+        }
 
         subject_content = subject.render(c)
         text_content = text.render(c)
