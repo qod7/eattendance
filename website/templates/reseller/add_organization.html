@@ -5,6 +5,7 @@
     Add an Organization
 {% endblock page_title %}
 
+
 {% block content %}
 <div class="col-md-6">
     <div class="portlet light bordered">
@@ -18,60 +19,50 @@
             <form role="form" action="" method="post">
 
                 {% csrf_token %}
-                {{ form.as_p }}
-        {% comment %}
+
                 <div class="form-body">
 
                     {{ form.non_field_errors.as_text }}
 
+                    <div class="form-group form-md-line-input {% if form.organization_name.errors %}has-error{% else %}form-md-floating-label{% endif %}">
+
+                        {{ form.organization_name }}
+
+                        <label for="id_organization_name">Name of the Organization</label>
+                        <span class="help-block">{{ form.organization_name.errors.as_text }}</span>
+                    </div>
+
                     <div class="form-group form-md-line-input {% if form.first_name.errors %}has-error{% else %}form-md-floating-label{% endif %}">
-                        {# <input type="text" class="form-control {% if form.first_name.errors %}edited{% endif %}" id="id_first_name" name="first_name" maxlength="30"> #}
+
                         {{ form.first_name }}
-                        <label for="id_first_name">First Name</label>
+
+                        <label for="id_first_name">Admin's First Name</label>
                         <span class="help-block">{{ form.first_name.errors.as_text }}</span>
                     </div>
                     <div class="form-group form-md-line-input {% if form.last_name.errors %}has-error{% else %}form-md-floating-label{% endif %}">
-                        {# <input type="text" class="form-control {% if form.last_name.errors %}edited{% endif %}" id="id_last_name" name="last_name" maxlength="30"> #}
+
                         {{ form.last_name }}
-                        <label for="id_last_name">Last Name</label>
+
+                        <label for="id_last_name">Admin's Last Name</label>
                         <span class="help-block">{{ form.last_name.errors.as_text }}</span>
                     </div>
                     <div class="form-group form-md-line-input {% if form.email.errors %}has-error{% else %}form-md-floating-label{% endif %}">
-                        {# <input class="form-control {% if form.email.errors %}edited{% endif %}" id="id_email" name="email" type="email"> #}
+
                         {{ form.email }}
+
                         <label for="id_email">Email Address</label>
                         <span class="help-block">{{ form.email.errors.as_text }}</span>
                     </div>
                     <div class="form-group form-md-line-input {% if form.contact.errors %}has-error{% else %}form-md-floating-label{% endif %}">
-                        {# <input type="text" class="form-control {% if form.contact.errors %}edited{% endif %}" id="id_contact" name="contact" maxlength="50"> #}
+
                         {{ form.contact }}
+
                         <label for="id_contact">Contact Number</label>
                         <span class="help-block">{{ form.contact.errors.as_text }}</span>
                     </div>
-                    <div class="form-group form-md-line-input {% if form.remarks.errors %}has-error{% else %}form-md-floating-label{% endif %}">
-                        {# <textarea class="form-control {% if form.remarks.errors %}edited{% endif %}" rows="3" name="remarks" id="id_remarks"></textarea> #}
-                        {{ form.remarks }}
-                        <label for="id_remarks">Additional Info</label>
-                        <span class="help-block">Optional</span>
-                        {% if form.remarks.errors %}<span class="help-block">{{ form.remarks.errors.as_text }}</span>{% endif %}
-                    </div>
-                    <div class="form-group form-md-line-input">
-                        <select class="form-control {% if form.organization_creation_limit.errors %}edited{% endif %}" id="id_organization_creation_limit" name="organization_creation_limit">
-                            <option value="1">1</option>
-                            <option value="5" selected>5</option>
-                            <option value="10">10</option>
-                            <option value="100">100</option>
-                            <option value="1000">1000</option>
-                        </select>
-                        <label for="id_organization_creation_limit">Organization Limit</label>
-                        <span class="help-block display-show">{{ form.organization_creation_limit.help_text }}</span>
-                        {% if form.remarks.errors %}<span class="help-block">{{ form.organization_creation_limit.errors.as_text }}</span>{% endif %}
-                    </div>
                 </div>
-        {% endcomment %}
-
                 <div class="form-actions noborder">
-                    <button type="submit" class="btn blue">Add Reseller</button>
+                    <button type="submit" class="btn blue">Add Organization</button>
                 </div>
             </form>
         </div>
@@ -90,6 +81,12 @@
 
 {# todo: edit this #}
 <script type="text/javascript">
+    {% if form.organization_name.errors %}
+    $( document ).ready(function() {
+        $( "#id_organization_name" ).addClass( "edited" );
+    });
+    {% endif %}
+
     {% if form.first_name.errors %}
     $( document ).ready(function() {
         $( "#id_first_name" ).addClass( "edited" );
@@ -110,6 +107,7 @@
 
     {% if form.errors %}
     $( document ).ready(function() {
+        $( "#id_organization_name" ).addClass( "edited" );
         $( "#id_first_name" ).addClass( "edited" );
         $( "#id_last_name" ).addClass( "edited" );
         $( "#id_email" ).addClass( "edited" );
