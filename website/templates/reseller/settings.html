@@ -5,10 +5,39 @@
     Settings
 {% endblock page_title %}
 
+{% comment %}
+
+{% block breadcrumb %}
+    <div class="page-bar">
+       <ul class="page-breadcrumb">
+           <li>
+               <i class="fa fa-wrench"></i>
+               <a href="#">Account</a>
+               <i class="fa fa-angle-right"></i>
+           </li>
+           <li>
+               <a href="#">Settings</a>
+           </li>
+       </ul>
+    </div>
+{% endblock breadcrumb %}
+{% endcomment %}
+
 
 {% block content %}
 
-<h3>Change Password</h3>
+<br>
+<h4>Change Password</h4>
+<hr>
+<div class="row">
+    <div class="col-lg-4">
+        {% include "useraccounts/password_change/password_change.html" %}
+    </div>
+</div>
+<hr>
+
+<br>
+<h4>Account Info</h4>
 <hr>
 <div class="row">
     <div class="col-lg-4">
