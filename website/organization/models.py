@@ -14,6 +14,7 @@ class Organization(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='organization')
     name = models.CharField("Name", max_length=100)
     contact = models.CharField("Admin's Contact Number", max_length=50)
+    remarks = models.TextField(blank=True, default="")
     reseller = models.ForeignKey(Reseller, on_delete=models.CASCADE)
 
     class Meta:
