@@ -20,3 +20,19 @@ class OrganizationTestMixin(LoginRequiredMixin, UserPassesTestMixin):
 
 class HomeView(OrganizationTestMixin, TemplateView):
     template_name = "organization/base.html"
+
+
+class StaffListView(OrganizationTestMixin, TemplateView):
+    template_name = "organization/list_staff.html"
+
+
+class MessagesView(OrganizationTestMixin, TemplateView):
+    template_name = "organization/messages.html"
+
+
+class AnalyticsView(OrganizationTestMixin, TemplateView):
+    template_name = "organization/analytics.html"
+
+
+class SettingsView(OrganizationTestMixin, TemplateView):
+    template_name = "organization/settings.html"
