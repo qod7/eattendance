@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 # from django.db.models.fields.related_descriptors import RelatedObjectDoesNotExist
 
@@ -22,7 +23,7 @@ class HomeView(OrganizationTestMixin, TemplateView):
     template_name = "organization/dashboard.html"
 
 
-class StaffListView(OrganizationTestMixin, TemplateView):
+class StaffListView(OrganizationTestMixin, ListView):
 
     """
     Lists the current staff
