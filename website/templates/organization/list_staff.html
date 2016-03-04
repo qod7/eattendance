@@ -74,10 +74,10 @@
                         <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes"/>
                     </th>
                     <th>
-                         Name
+                         Photo
                     </th>
                     <th>
-                         Admin
+                         Name
                     </th>
                     <th>
                          Username
@@ -86,17 +86,11 @@
                          Email
                     </th>
                     <th>
-                         Contact
+                         Shift
                     </th>
                     <th>
                          Date Added
-                    </th>
-                    <th>
-                         Organizations
-                    </th>
-                    <th>
-                         Edit
-                    </th>
+                    </th>                    
                 </tr>
                 </thead>
 
@@ -107,26 +101,23 @@
                             <input type="checkbox" class="checkboxes" value="1"/>
                         </td>
                         <td>
-                             {{ organization.name.title }}
+                             <img src="{{staff.photo.url }}">
                         </td>
                         <td>
-                             {{ organization.user.get_full_name }}
+                             {{staff.user.get_full_name }}
                         </td>
                         <td>
-                             {{ organization.user.username }}
+                             {{staff.user.username }}
                         </td>
                         <td>
-                            <a href="mailto:{{ organization.user.email }}">
-                            {{ organization.user.email }} </a>
+                            <a href="mailto:{{staff.user.email }}">
+                            {{staff.user.email }} </a>
                         </td>
                         <td>
-                             {{ organization.contact }}
+                             {{staff.shift }}
                         </td>
                         <td class="center">
-                             {{ organization.user.date_joined.date }}
-                        </td>
-                        <td>
-                            Edit
+                             {{ staff.user.date_joined.date }}
                         </td>
                     </tr>
                     {% endfor %}
