@@ -24,6 +24,20 @@ class Organization(models.Model):
     def __str__(self):
         return self.name
 
+    def deactivate_account(self):
+        """
+        Deactivated accounts get a message at login.
+        """
+        self.user.is_active = False
+        self.user.save()
+
+    def activate_account(self):
+        """
+        For re-activation.
+        """
+        self.user.is_active = True
+        self.user.save()
+
 
 class Message(models.Model):
 
@@ -94,6 +108,20 @@ class Staff(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    def deactivate_account(self):
+        """
+        Deactivated accounts get a message at login.
+        """
+        self.user.is_active = False
+        self.user.save()
+
+    def activate_account(self):
+        """
+        For re-activation.
+        """
+        self.user.is_active = True
+        self.user.save()
 
 
 class Attendance(models.Model):
