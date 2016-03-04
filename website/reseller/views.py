@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 
-from organization.models import Organization
+from organization.models import Organization, Staff, Attendance
 
 from .models import Reseller
 from .forms import AddOrganizationForm
@@ -36,9 +36,21 @@ class HomeView(ResellerTestMixin, TemplateView):
     """
     template_name = "reseller/dashboard.html"
 
+    def dispatch(self, request, *args, **kwargs):
+        self.reseller = self.request.user.reseller
+        return super(HomeView, self).dispatch(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         context['title'] = "Dashboard"
+        context['organization_count'] = Organization.objects.filter(reseller=self.reseller).count()
+        context['staff_count'] = Staff.objects.filter(organization__reseller=self.reseller).count()
+        try:
+            Staff.objects.get(organization__reseller=self.reseller)
+        except (Staff.DoesNotExist, Staff.MultipleObjectsReturned):
+            context['attendance_count'] = 0
+        else:
+            context['attendance_count'] = Attendance.objects.filter(staff__organization__reseller=self.reseller).count()
         return context
 
 
