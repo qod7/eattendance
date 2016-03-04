@@ -86,6 +86,7 @@ class Staff(models.Model):
     extras = JSONField()
     preferences = JSONField()
     photo = models.ImageField()
+    contact = models.CharField("Contact Info", max_length=50, blank=True, default="")
 
     class Meta:
         verbose_name = "Staff"
