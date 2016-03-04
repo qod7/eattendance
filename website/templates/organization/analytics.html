@@ -2,17 +2,17 @@
 
 
 {% block page_title %}
-    Received Messages
+	Analytics
 {% endblock page_title %}
 
 
 {% block extrajs %}
 	<script>
 	    $( document ).ready(function() {
-	        $( "#messages" ).addClass( "active" );
 	        $( "#dashboard" ).removeClass( "active" );
 	        $( "#list_staff" ).removeClass( "active" );
-	        $( "#analytics" ).removeClass( "active" );
+	        $( "#messages" ).removeClass( "active" );
+	        $( "#analytics" ).addClass( "active" );
 	    });
 	</script>
 {% endblock extrajs %}

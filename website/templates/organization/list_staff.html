@@ -143,11 +143,12 @@
 
 
 {% block extrajs %}
-<script>
+<script>    
     $( document ).ready(function() {
+        $( "#list_staff" ).addClass( "active" );
         $( "#dashboard" ).removeClass( "active" );
-        $( "#add_organization" ).removeClass( "active" );
-        $( "#list_organizations" ).addClass( "active" );
+        $( "#messages" ).removeClass( "active" );
+        $( "#analytics" ).removeClass( "active" );
     });
 </script>
 

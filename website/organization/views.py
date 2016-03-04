@@ -19,7 +19,7 @@ class OrganizationTestMixin(LoginRequiredMixin, UserPassesTestMixin):
 
 
 class HomeView(OrganizationTestMixin, TemplateView):
-    template_name = "organization/base.html"
+    template_name = "organization/dashboard.html"
 
 
 class StaffListView(OrganizationTestMixin, TemplateView):
