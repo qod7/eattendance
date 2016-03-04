@@ -25,7 +25,7 @@ class AddOrganizationForm(GenericUserCreationForm):
         widget=forms.TextInput(attrs={'class': "form-control"})
     )
 
-    def save(self):
+    def save(self, reseller):
         """
         Creates the user and saves the organization from form parameters.
         Sends login credentials in email.
@@ -35,9 +35,10 @@ class AddOrganizationForm(GenericUserCreationForm):
         assert user is not None
 
         # create an organization
+        # todo: review pattern for inject user into form in Two Scoops.
         Organization.objects.create(
             user=user,
             name=self.cleaned_data.get('organization_name'),
             contact=self.cleaned_data.get('contact'),
-            reseller=self.request.user.reseller,
+            reseller=reseller,
         )

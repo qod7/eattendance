@@ -45,7 +45,7 @@ class GenericUserCreationForm(forms.Form):
 
     def clean_username(self, username):
         # check if user is unique and if not, make it unique
-        if User.objects.filter(username=username).exists():
+        while User.objects.filter(username=username).exists():
             username = username + '1'
         return username
 

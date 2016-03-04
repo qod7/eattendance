@@ -1,8 +1,11 @@
 from django.views.generic import TemplateView
+from django.views.generic.list import ListView
 from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.core.urlresolvers import reverse
+
+from organization.models import Organization
 
 from .models import Reseller
 from .forms import AddOrganizationForm
@@ -39,17 +42,22 @@ class HomeView(ResellerTestMixin, TemplateView):
         return context
 
 
-class ListOrganizationsView(ResellerTestMixin, TemplateView):
+class ListOrganizationsView(ResellerTestMixin, ListView):
 
     """
     Lists the current organizations with various fields.
     """
+
+    context_object_name = 'organization_list'
     template_name = "reseller/list_organizations.html"
 
     def get_context_data(self, **kwargs):
         context = super(ListOrganizationsView, self).get_context_data(**kwargs)
         context['title'] = "List Organizations"
         return context
+
+    def get_queryset(self):
+        return Organization.objects.select_related('user').all()
 
 
 class AddOrganizationView(ResellerTestMixin, FormView):
@@ -66,7 +74,7 @@ class AddOrganizationView(ResellerTestMixin, FormView):
         return reverse('reseller:list_organizations')
 
     def form_valid(self, form):
-        form.save(commit=False)
+        form.save(reseller=self.request.user.reseller)
         # form.send_email()
         return super(AddOrganizationView, self).form_valid(form)
 
