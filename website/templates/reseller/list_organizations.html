@@ -54,14 +54,17 @@
                                         <a href="#">
                                         Send Email </a>
                                     </li>
-                                    <li>
-                                        <a href="#">
-                                        Deactivate Account </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                        Activate Account </a>
-                                    </li>
+                                    <form method="POST" action="">
+                                        {% csrf_token %}
+                                        <li id="deactivate_button">
+                                            <a href="#">
+                                            Deactivate Account</a>
+                                        </li>
+                                        <li id="activate_button">
+                                            <a href="#">
+                                            Activate Account </a>
+                                        </li>
+                                    </form>
                                 </ul>
                             </div>
                         </div>
@@ -163,6 +166,17 @@
 jQuery(document).ready(function() {
     TableManaged.init();
 });
+</script>
+
+{# scripts to submit form when deactivate and activate are pressed #}
+<script type="text/javascript">
+    $('#deactivate_button').click(function(){
+        this.form.submit();
+    });
+
+    $('#activate_button').click(function(){
+        this.form.submit();
+    });
 </script>
 {% endblock extrajs %}
 
