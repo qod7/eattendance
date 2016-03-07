@@ -63,6 +63,15 @@ class ListOrganizationsView(ResellerTestMixin, ListView):
     context_object_name = 'organization_list'
     template_name = "reseller/list_organizations.html"
 
+    def post(self, request, *args, **kwargs):
+        if 'deactivate' in self.request.POST:
+            pass
+
+        if 'activate' in self.request.POST:
+            pass
+
+        return super(ListOrganizationsView, self).post(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super(ListOrganizationsView, self).get_context_data(**kwargs)
         context['title'] = "List Organizations"
