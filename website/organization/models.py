@@ -146,3 +146,44 @@ class Attendance(models.Model):
 
     def __str__(self):
         return self.staff.user.get_full_name()
+
+
+class Calendar(models.Model):
+
+    """
+    Calendar for an organization
+    """
+
+    organization = models.OneToOneField(Organization, related_name="calendar", on_delete=models.PROTECT)
+
+    class Meta:
+        verbose_name = "Calendar"
+        verbose_name_plural = "Calendars"
+
+    def __str__(self):
+        return self.organization.name
+
+    def convert_ad_to_bs(self):
+        pass
+
+    def convert_bs_to_ad(self):
+        pass
+
+
+class Event(models.Model):
+
+    """
+    Stores an event in the calendar.
+    """
+
+    title = models.CharField("Title", max_length=50)
+    description = models.TextField()
+    calendar = models.ForeignKey(Calendar, related_name="events", on_delete=models.CASCADE)
+    event_date = models.DateField()
+
+    class Meta:
+        verbose_name = "Event"
+        verbose_name_plural = "Events"
+
+    def __str__(self):
+        return self.title
