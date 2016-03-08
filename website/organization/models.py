@@ -98,7 +98,6 @@ class Staff(models.Model):
     unique_id = models.CharField("Unique Id", primary_key=True, max_length=15)
     dob = models.DateField()
     extras = JSONField()
-    preferences = JSONField()
     photo = models.ImageField()
     contact = models.CharField("Contact Info", max_length=50, blank=True, default="")
 
