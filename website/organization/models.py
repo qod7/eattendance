@@ -145,4 +145,4 @@ class Attendance(models.Model):
         verbose_name_plural = "Attendances"
 
     def __str__(self):
-        return self.staff.username
+        return self.staff.user.get_full_name()
