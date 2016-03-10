@@ -67,8 +67,17 @@ class Shift(models.Model):
     """
 
     name = models.CharField("Name of the Shift", max_length=50)
-    checkIn = models.TimeField()
-    checkOut = models.TimeField()
+    on_duty_time = models.TimeField()
+    off_duty_time = models.TimeField()
+    late_time = models.TimeField()
+    leave_early_time = models.TimeField()
+    beginning_in = models.TimeField()
+    ending_in = models.TimeField()
+    beginning_out = models.TimeField()
+    ending_out = models.TimeField()
+    check_in = models.TimeField()
+    check_out = models.TimeField()
+    organization = models.ForeignKey(Organization, related_name='shifts', on_delete=models.PROTECT)
 
     class Meta:
         verbose_name = "Shift"
@@ -98,6 +107,7 @@ class Staff(models.Model):
     unique_id = models.CharField("Unique Id", primary_key=True, max_length=15)
     dob = models.DateField()
     extras = JSONField()
+    preferences = JSONField()
     photo = models.ImageField()
     contact = models.CharField("Contact Info", max_length=50, blank=True, default="")
 
@@ -121,6 +131,9 @@ class Staff(models.Model):
         """
         self.user.is_active = True
         self.user.save()
+
+    def is_present(self, date):
+        return Attendance.objects.filter(staff=self, when=date).exists()
 
 
 class Attendance(models.Model):
@@ -169,6 +182,27 @@ class Calendar(models.Model):
     def convert_bs_to_ad(self):
         pass
 
+    def get_hoildays(self):
+        return Event.objects.filter(calendar=self, title__icontains="Holiday")
+
+
+class Day(models.Model):
+
+    """
+    Represents a day in a particular calendar
+    """
+
+    date = models.DateField()
+    calendar = models.ForeignKey(Calendar)
+    holiday = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "Day"
+        verbose_name_plural = "Days"
+
+    def __str__(self):
+        return self.date
+
 
 class Event(models.Model):
 
@@ -178,8 +212,9 @@ class Event(models.Model):
 
     title = models.CharField("Title", max_length=50)
     description = models.TextField()
-    calendar = models.ForeignKey(Calendar, related_name="events", on_delete=models.CASCADE)
-    event_date = models.DateField()
+    day = models.ForeignKey(Day)
+    # if it's an event that spans multiple days, define end_date as well
+    # end_day = models.ForeignKey(Day, null=True)
 
     class Meta:
         verbose_name = "Event"
