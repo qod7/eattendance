@@ -6,7 +6,6 @@ from . import views
 from reseller import urls as reseller_urls
 from organization import urls as organization_urls
 from superadmin import urls as superadmin_urls
-# from api import urls as api_urls
 from useraccounts import urls as account_urls
 
 urlpatterns = [
@@ -17,8 +16,7 @@ urlpatterns = [
     url(r'^organization/', include(organization_urls, namespace='organization')),
     url(r'^superadmin/', include(superadmin_urls, namespace='superadmin')),
 
-    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    # url(r'^api/', include(api_urls, namespace='api')),
+    url(r'^api/', include('api.urls', namespace='api')),
 
     url(r'^$', views.HomeView.as_view(), name='home'),
     url(r'^(?P<filename>(robots.txt)|(humans.txt))$',
