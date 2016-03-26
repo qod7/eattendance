@@ -1,8 +1,8 @@
 from django.conf.urls import url
 
-from rest_framework import routers
+from api.views import SaveAttendance
 
-router = routers.SimpleRouter()
 
 urlpatterns = [
-] + router.urls
+    url(r'^attendance/', SaveAttendance.as_view(), name='attendance')
+]
