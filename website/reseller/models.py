@@ -9,7 +9,6 @@ def get_default_expiry_date():
 
 
 class Reseller(models.Model):
-
     """
     All info and methods pertaining to a reseller
     """

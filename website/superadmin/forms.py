@@ -11,7 +11,6 @@ from reseller.models import Reseller
 
 
 class AddResellerForm(forms.ModelForm):
-
     """
     Form for adding a new reseller.
     """

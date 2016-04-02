@@ -7,7 +7,6 @@ from organization.models import Organization
 
 
 class ResellerViewsTestCase(TestCase):
-
     """Tests for reseller.views"""
 
     def setUp(self):

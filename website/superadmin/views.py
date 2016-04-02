@@ -12,7 +12,6 @@ from organization.models import Organization, Staff, Attendance
 
 
 class SuperAdminTestMixin(LoginRequiredMixin, UserPassesTestMixin):
-
     """
     Checks if user is logged in and if user is a superadmin
     """
@@ -22,7 +21,6 @@ class SuperAdminTestMixin(LoginRequiredMixin, UserPassesTestMixin):
 
 
 class HomeView(SuperAdminTestMixin, TemplateView):
-
     """
     Dashboard that shows overall statistics.
     """
@@ -39,7 +37,6 @@ class HomeView(SuperAdminTestMixin, TemplateView):
 
 
 class ResellerListView(SuperAdminTestMixin, ListView):
-
     """
     Lists the current resellers with various fields.
     """
@@ -56,7 +53,6 @@ class ResellerListView(SuperAdminTestMixin, ListView):
 
 
 class AddResellerView(SuperAdminTestMixin, FormView):
-
     """
     Shows and processes form to add a reseller.
     """
@@ -80,7 +76,6 @@ class AddResellerView(SuperAdminTestMixin, FormView):
 
 
 class SettingsView(SuperAdminTestMixin, TemplateView):
-
     """
     Edit user settings.
     - Change Password

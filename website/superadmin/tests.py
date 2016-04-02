@@ -6,7 +6,6 @@ from reseller.models import Reseller
 
 
 class OrganizationTestCase(TestCase):
-
     """
     Tests for organization
     """

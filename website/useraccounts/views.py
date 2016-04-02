@@ -13,10 +13,9 @@ from organization.models import Organization
 
 
 class LoginView(View):
-
-    '''
+    """
     View for logging in a user.
-    '''
+    """
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated():
@@ -71,7 +70,6 @@ def logout(request):
 
 
 class ResetPasswordView(View):
-
     """
     Resets password
     """

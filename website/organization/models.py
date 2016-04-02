@@ -11,7 +11,6 @@ from reseller.models import Reseller
 
 
 class Organization(models.Model):
-
     """
     A generic organization. From here we can inherit school, bank etc.
     """
@@ -45,7 +44,6 @@ class Organization(models.Model):
 
 
 class Message(models.Model):
-
     """
     A Message is something sent by the organization to a subset of staff
     """
@@ -66,7 +64,6 @@ class Message(models.Model):
 
 
 class Shift(models.Model):
-
     """
     Defines a Shift for a staff
     """
@@ -93,7 +90,6 @@ class Shift(models.Model):
 
 
 class Staff(models.Model):
-
     """
     A staff can log in to the android app.
     - is associated with an organization
@@ -142,7 +138,6 @@ class Staff(models.Model):
 
 
 class Attendance(models.Model):
-
     """
     Records a single attendance
     """
@@ -167,7 +162,6 @@ class Attendance(models.Model):
 
 
 class Calendar(models.Model):
-
     """
     Calendar for an organization
     """
@@ -192,7 +186,6 @@ class Calendar(models.Model):
 
 
 class Day(models.Model):
-
     """
     Represents a day in a particular calendar
     """
@@ -210,7 +203,6 @@ class Day(models.Model):
 
 
 class Event(models.Model):
-
     """
     Stores an event in the calendar.
     """

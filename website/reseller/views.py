@@ -12,7 +12,6 @@ from .forms import AddOrganizationForm
 
 
 class ResellerTestMixin(LoginRequiredMixin, UserPassesTestMixin):
-
     """
     Checks if user is logged in and if user is a reseller.
 
@@ -30,7 +29,6 @@ class ResellerTestMixin(LoginRequiredMixin, UserPassesTestMixin):
 
 
 class HomeView(ResellerTestMixin, TemplateView):
-
     """
     Dashboard that shows overall statistics.
     """
@@ -55,7 +53,6 @@ class HomeView(ResellerTestMixin, TemplateView):
 
 
 class ListOrganizationsView(ResellerTestMixin, ListView):
-
     """
     Lists the current organizations with various fields.
     """
@@ -82,7 +79,6 @@ class ListOrganizationsView(ResellerTestMixin, ListView):
 
 
 class AddOrganizationView(ResellerTestMixin, FormView):
-
     """
     Shows and processes form to add an organization.
     """
@@ -106,7 +102,6 @@ class AddOrganizationView(ResellerTestMixin, FormView):
 
 
 class SettingsView(ResellerTestMixin, TemplateView):
-
     """
     Edit user settings.
     - Change Password

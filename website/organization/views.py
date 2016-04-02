@@ -7,7 +7,6 @@ from .models import Organization, Staff
 
 
 class OrganizationTestMixin(LoginRequiredMixin, UserPassesTestMixin):
-
     """
     Checks if user is logged in and if user is a organization.
     """
@@ -24,7 +23,6 @@ class HomeView(OrganizationTestMixin, TemplateView):
 
 
 class StaffListView(OrganizationTestMixin, ListView):
-
     """
     Lists the current staff
     """

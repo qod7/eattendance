@@ -11,7 +11,6 @@ from .views import LoginView
 
 
 class LoginTestCase(TestCase):
-
     """Tests for Login"""
     # todo: test own functions by simulating HttpRequests
 
@@ -121,7 +120,6 @@ class LoginTestCase(TestCase):
 
 @override_settings(EMAIL_BACKEND='django.core.mail.backends.locmem.EmailBackend')
 class ForgotPasswordTestCase(TestCase):
-
     """
     Tests for Forgot Password
     """

@@ -5,7 +5,6 @@ from organization.models import Organization
 
 
 class AddOrganizationForm(GenericUserCreationForm):
-
     """
     Form for creating an organization
     1. Take input data: org name, org admin name, email address

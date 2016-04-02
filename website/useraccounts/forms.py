@@ -8,7 +8,6 @@ from django.template.loader import get_template
 
 
 class GenericUserCreationForm(forms.Form):
-
     """
     - Takes first name, last name, email
     - Creates a username with firstname_lastname
