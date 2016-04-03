@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.conf import settings
 from django.dispatch import receiver
@@ -98,14 +100,16 @@ class Staff(models.Model):
     - has a particular shift
     """
 
-    # some sort of ID (15 digit, 5 digit for organization, 5 for user, and 5 random padding for security?)
-    # TODO user group
     user = models.OneToOneField(User, related_name='staff', on_delete=models.CASCADE)
     organization = models.ForeignKey(Organization, related_name='staffs', on_delete=models.CASCADE)
     shifts = models.ManyToManyField(Shift, related_name="staff")
-    # 15 digit, 5 digit for organization,
-    # 5 for user, and 5 random padding for security
-    unique_id = models.CharField("Unique Id", primary_key=True, max_length=15)
+
+    # unique_id = models.CharField("Unique Id", primary_key=True, max_length=15)
+
+    # Using uuid to generate unique_id
+    # Very very very low chance of collision
+    unique_id = models.UUIDField(default=uuid.uuid4, primary_key=True)
+
     dob = models.DateField()
     extras = JSONField()
     preferences = JSONField()
