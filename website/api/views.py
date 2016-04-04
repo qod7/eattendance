@@ -31,6 +31,3 @@ class StaffViewSet(viewsets.ModelViewSet):
     queryset = Staff.objects.all()
     serializer_class = StaffSerializer
     authentication_classes = [TokenAuthentication, ]
-
-    def create(self, request, *args, **kwargs):
-        logger.debug('Received request for staff create')
