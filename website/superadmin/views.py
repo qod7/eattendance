@@ -1,11 +1,11 @@
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, UpdateView
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.urlresolvers import reverse
 
-from .forms import AddResellerForm
+from .forms import AddResellerForm, ResellerUpdateForm
 
 from reseller.models import Reseller
 from organization.models import Organization, Staff, Attendance
@@ -65,13 +65,31 @@ class AddResellerView(SuperAdminTestMixin, FormView):
         return reverse('superadmin:list_resellers')
 
     def form_valid(self, form):
-        form.save(commit=False)
+        form.save()
         # form.send_email()
         return super(AddResellerView, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super(AddResellerView, self).get_context_data(**kwargs)
         context['title'] = "Add a Reseller"
+        return context
+
+
+class ResellerUpdateView(SuperAdminTestMixin, UpdateView):
+    """
+    Shows and processes form to add a reseller.
+    """
+    model = Reseller
+    form_class = ResellerUpdateForm
+    template_name = 'superadmin/update_reseller.html'
+
+    def get_success_url(self):
+        messages.success(self.request, 'Reseller has been updated!')
+        return reverse('superadmin:list_resellers')
+
+    def get_context_data(self, **kwargs):
+        context = super(ResellerUpdateView, self).get_context_data(**kwargs)
+        context['title'] = "Update Reseller"
         return context
 
 
