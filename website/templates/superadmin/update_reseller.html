@@ -1,0 +1,17 @@
+{% extends "superadmin/base.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+
+{% block page_title %}
+    Update Reseller
+{% endblock page_title %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        {% crispy form %}
+    </div>
+</div>
+{% endblock content %}
