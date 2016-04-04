@@ -1,5 +1,8 @@
 from django import forms
 
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+
 from reseller.models import Reseller
 from useraccounts.forms import GenericUserCreationForm
 
@@ -52,3 +55,25 @@ class AddResellerForm(GenericUserCreationForm):
             remarks=self.cleaned_data.get('remarks'),
             organization_creation_limit=self.cleaned_data.get('organization_creation_limit'),
         )
+
+
+class ResellerUpdateForm(forms.ModelForm):
+    """
+    Form for updating a reseller
+    """
+    class Meta:
+        model = Reseller
+        fields = ['contact', 'remarks', 'organization_creation_limit']
+        widgets = {
+            'contact': forms.TextInput(attrs={'class': "form-control"}),
+            'remarks': forms.Textarea(attrs={'class': "form-control"}),
+            'organization_creation_limit': forms.NumberInput(
+                attrs={'class': "form-control"}
+            )
+        }
+
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.add_input(Submit('update', 'Update', css_class='btn-primary'))
+        super(ResellerUpdateForm, self).__init__(*args, **kwargs)
