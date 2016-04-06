@@ -97,8 +97,14 @@ class Staff(models.Model):
     organization = models.ForeignKey(Organization, related_name='staffs', on_delete=models.CASCADE)
     shifts = models.ManyToManyField(Shift, related_name="staff")
     dob = models.DateField()
-    extras = JSONField(null=True, blank=True)
-    preferences = JSONField(null=True, blank=True)
+
+    # JSONField not supported by model_mommy
+    # extras = JSONField(null=True, blank=True)
+    # preferences = JSONField(null=True, blank=True)
+
+    extras = models.TextField(null=True, blank=True)
+    preferences = models.TextField(null=True, blank=True)
+
     photo = models.ImageField()
     contact = models.CharField("Contact Info", max_length=50, blank=True, default="")
 
