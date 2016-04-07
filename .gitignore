@@ -6,3 +6,4 @@ htmlcov
 Backup_template/
 emailcopies/
 todo.TODO
+django_debug.log
