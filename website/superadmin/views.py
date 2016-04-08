@@ -2,8 +2,10 @@ from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.edit import FormView, UpdateView
 from django.contrib import messages
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.core.urlresolvers import reverse
+from django.contrib.auth.views import password_change
+from django.core.urlresolvers import reverse, reverse_lazy
 
 from .forms import AddResellerForm, ResellerUpdateForm
 
@@ -102,7 +104,20 @@ class SettingsView(SuperAdminTestMixin, TemplateView):
     """
     template_name = "superadmin/settings.html"
 
+    def post(self, request, *args, **kwargs):
+        template = password_change(
+            self.request,
+            template_name="superadmin/settings.html",
+            post_change_redirect=self.get_redirect_url()
+        )
+        return template
+
+    def get_redirect_url(self):
+        # messages.success(self.request, "Your password has been changed successfully.")
+        return reverse_lazy('superadmin:settings')
+
     def get_context_data(self, **kwargs):
         context = super(SettingsView, self).get_context_data(**kwargs)
         context['title'] = "Settings"
+        context['form'] = PasswordChangeForm(user=self.request.user)
         return context
