@@ -75,7 +75,8 @@ class ListOrganizationsView(ResellerTestMixin, ListView):
         return context
 
     def get_queryset(self):
-        return Organization.objects.select_related('user').all()
+        current_reseller = Reseller.objects.get(user=self.request.user)
+        return Organization.objects.select_related('user').filter(reseller=current_reseller)
 
 
 class AddOrganizationView(ResellerTestMixin, FormView):
