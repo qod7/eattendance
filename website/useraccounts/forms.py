@@ -62,7 +62,7 @@ class GenericUserCreationForm(forms.Form):
         """
         Sends an email to the user with their login credentials
         """
-        from_email = 'Passion Technologies<passion@gmail.com>'
+        from_email = 'Passion Technologies <attendance.passion@gmail.com>'
         template_subject = 'useraccounts/email_templates/subject.txt'
         template_html = 'useraccounts/email_templates/email.html'
         template_text = 'useraccounts/email_templates/email.txt'
